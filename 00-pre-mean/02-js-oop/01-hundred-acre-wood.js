@@ -1,86 +1,105 @@
 var tiger = {
-    character : "Tiger"
+    character : "Tiger",
+    greet : function(){
+        console.log("i Am ThE tIgEr cHaRaCtEr")
+    }
 };
-tiger.north = pooh;
 var pooh = {
-    character : "Winnie the Pooh"
+    character : "Winnie the Pooh",
+    greet : function(){
+            console.log("i Am ThE pOoH cHaRaCtEr")
+        }
+    };
+var pigglet = {
+character : "Pigglet",
+greet : function(){
+    console.log("i Am ThE "+pigglet.character+" cHaRaCtEr")
+}
 };
+var owl = {
+character : "Owl",
+greet : function(){
+    console.log("i Am ThE "+owl.character+" cHaRaCtEr")
+}
+};
+var rabbit = {
+character : "Rabbit",
+greet : function(){
+    console.log("i Am ThE "+rabbit.character+" cHaRaCtEr")
+}
+};
+var eeyore = {
+character : "Eeyore",
+greet : function(){
+    console.log("i Am ThE "+eeyore.character+" cHaRaCtEr")
+}
+};
+var kanga = {
+character : "Kanga",
+greet : function(){
+    console.log("i Am ThE "+kanga.character+" cHaRaCtEr")
+}
+};
+var chris = {
+character : "Christopher Robin",
+greet : function(){
+    console.log("i Am ThE "+chris.character+" cHaRaCtEr")
+}
+};
+var gopher = {
+character : "gopher",
+greet : function(){
+    console.log("i Am ThE "+gopher.character+" cHaRaCtEr")
+}
+};
+var bees = {
+character : "Bess",
+greet : function(){
+        console.log("i Am ThE "+bees.character+" cHaRaCtEr")
+    }
+};
+var heffalumps = {
+character : "Heffalumps",
+greet : function(){
+        console.log("i Am ThE "+heffalumps.character+" cHaRaCtEr")
+    }
+};
+
+bees.north = rabbit;
+bees.west = pooh;
+gopher.wast = rabbit;
+bees.west = eeyore;
+chris.north =kanga;
+chris.east = rabbit;
+chris.south = pooh;
+chris.west = owl;
 pooh.north = chris;
 pooh.west = pigglet;
 pooh.east = bees;
 pooh.south = tiger;
-var pigglet = {
-    character : "Pigglet"
-};
 pigglet.north = owl;
-pigglet.east = pooh;
-var owl = {
-    character : "Owl"
-};
 owl.south = pigglet
 owl.east = chris
-var rabbit = {
-    character : "Rabbit"
-};
+pigglet.east = pooh;
 rabbit.east = chris;
 rabbit.west = gopher
 rabbit.south = bees;
-var eeyore = {
-    character : "Eeyore"
-};
 eeyore.south = kanga;
-eeyore.east =   heffalumps;
-var kanga = {
-    character : "Kanga"
-};
 kanga.south = chris;
-kanga.noth = eeyore;
-var chris = {
-    character : "Christopher Robin"
-};
-chris.north =kanga
-chris.east = rabbit
-chris.south = pooh;
-chris.west = owl;
-var gopher = {
-    character : "gopher"
-};
-gopher.wast = rabbit;
-var bees = {
-    character : "Bess"
-};
-bees.north = rabbit;
-bees.west = pooh;
-var heffalumps = {
-    character : "Heffalumps"
-};
-bees.west = eeyore;
+kanga.north = eeyore;
+eeyore.east = heffalumps;
 
-//player
+tiger.north = pooh;
 var player = {
-    loction : chris
-}
-//mover player
+    location : chris
+};
 function walk(direction){
-    if(player.loction[direction]){
-        if(direction == "north"){
-        player.loction = player.loction.north;
-        console.log("You are now at "+player.loction.character+"'s house.");
-        }
-        if(direction == "west"){
-        player.loction = player.loction.west;
-        console.log("You are now at "+player.loction.character+"'s house.");
-        }
-        if(direction == "east"){
-        player.loction = player.loction.east;
-        console.log("You are now at "+player.loction.character+"'s house.");
-        }
-        if(direction == "south"){
-        player.loction = player.loction.south;
-        console.log("You are now at "+player.loction.character+"'s house.");
-        }
+    console.log("this is the where the player will end up at",player.location[direction]);
+    console.log("this is where the player is",player.location);
+    if(player.location[direction]){
+        player.location = player.location[direction];
+        console.log("You are now at "+player.location.character+"'s house.");
     }else{
         console.log("Oh no, looks like you're at the edge of the woods.");
-    }
-}
-
+    };
+};
