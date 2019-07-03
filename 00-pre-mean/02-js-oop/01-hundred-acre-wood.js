@@ -55,3 +55,32 @@ var heffalumps = {
     character : "Heffalumps"
 };
 bees.west = eeyore;
+
+//player
+var player = {
+    loction : chris
+}
+//mover player
+function walk(direction){
+    if(player.loction[direction]){
+        if(direction == "north"){
+        player.loction = player.loction.north;
+        console.log("You are now at "+player.loction.character+"'s house.");
+        }
+        if(direction == "west"){
+        player.loction = player.loction.west;
+        console.log("You are now at "+player.loction.character+"'s house.");
+        }
+        if(direction == "east"){
+        player.loction = player.loction.east;
+        console.log("You are now at "+player.loction.character+"'s house.");
+        }
+        if(direction == "south"){
+        player.loction = player.loction.south;
+        console.log("You are now at "+player.loction.character+"'s house.");
+        }
+    }else{
+        console.log("Oh no, looks like you're at the edge of the woods.");
+    }
+}
+
