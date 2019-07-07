@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title>Javascript Demo</title>
+	<style>
+		body {
+			background-color:black;
+			font-family: monospace;
+			color:white;
+			font-size:50px;
+			text-align: center;
+			margin-top:20%;
+		}
+        div{
+            background-color: darkred;
+        }
+		.magic-formatting,.magic{
+			color: #777;
+			border-right: 1px solid #777;
+			padding-right: 7px;
+			display: inline;
+        }
+        
+	</style>
+</head>
+<body>
+    <!-- Test <div class="magic" id="test">heres an example with boreder line => </div> -->
+	Coding is <div id="magic" class="magic-formatting"></div>
+    
+  <script>
+      "use strict";
+
+		var words = ["a lot of fun", "about not giving up", "challenging and empowering", "creative expression", "what I learned at CodingDojo!","         "],
+			el = document.getElementById('magic'),
+			elTest = document.getElementById('test'),
+			word_counter = 0,
+            character_counter = 0,
+            addWords = '';
+            // elTest.innerHTML = elTest.innerHTML+" ";
+		function updateText()
+		{      
+            addWords = words[word_counter][character_counter++];
+            if (addWords === ' ') {
+				addWords = "&nbsp;" // use non-breaking space character
+			}
+            // elTest.innerHTML += addWords;
+            el.innerHTML += addWords;
+            console.log("here is words indexed|",addWords+"|");
+            console.log("here is words indexed|","|");
+            console.log("here is words index", character_counter);
+			if(character_counter == words[word_counter].length+1)
+			{
+				word_counter++; 	//choose a different wor.d
+				character_counter = 0;	//start over with the first character of the word
+				el.innerHTML = '';  //set the html to be blank
+				//if we're displaying the last word, go back to the first word
+				if(word_counter == words.length)
+					word_counter = 0;
+			}
+		}
+		setInterval(updateText,300);
+	</script>
+</body>
+</html>
