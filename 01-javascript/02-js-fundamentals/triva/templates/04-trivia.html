@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        *{
+            /* outline: 1px dotted lightblue; */
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            text-align: center;
+        }
+        .col{
+            text-align: center;
+            display: inline-block;
+            padding: 0% 5%;
+        }
+        .question{
+            width: 200px;
+            height: 120px;
+            margin: 30px 0px;
+            padding-top: 50px;
+            text-align: center;
+
+            background-image: linear-gradient(gold, coral,violet);
+            color: white;
+            font-weight: bold;  
+            border-radius: 15%;
+
+            
+        }
+        .question-form{
+            position: relative;
+            bottom: 60px;
+        }
+        
+        button{
+            display: block;
+            margin: 5px auto;
+            position: relative;
+            top: 10px;
+
+            border-radius: 10%;
+            background-color: aqua;    
+            border: none;
+        }
+        h5{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        label,h5{
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            //histroy easy
+            // $.get('https://opentdb.com/api.php?amount=3&category=23&difficulty=easy&type=multiple')
+            // //art
+            // $.get('https://opentdb.com/api.php?amount=3&category=25&difficulty=easy&type=multiple')
+            
+            $(".question").click(function(){
+                let contents = $(this).html();
+                //grab the elements this for animation control
+                const parent = this;
+
+                console.log("click triggerd")
+                
+                
+                submitQuestion(parent);
+
+                if(contents == "<p>100</p>"){
+                    displayForm(parent,'easy',20);
+                    };
+                if(contents == "<p>200</p>"){
+                    displayForm(parent,'medium',20);
+                    };
+                if(contents == "<p>300</p>"){
+                    displayForm(parent,'hard',20);
+                    };
+                    
+                });
+
+        });
+function displayForm(parent,difficulty,category){
+    $.get(`https://opentdb.com/api.php?amount=1&category=${category}&difficulty=${difficulty}&type=multiple`, displayQuestions);
+        function displayQuestions(data){
+            console.log(data.results[0].question)
+
+            let question = data.results[0].question;
+            let theAnswer = data.results[0].correct_answer;
+            let answers = data.results[0].incorrect_answers;
+            //get a randomly genrated number in answers length;
+
+            var correctIndex = getRandomInt(0,3);
+            answers.splice(correctIndex,0,theAnswer);
+
+            let rawScore = $(parent).html();
+            let score = '';
+            score += rawScore[3];
+            score += rawScore[4];
+            score += rawScore[5];
+            console.log("this is score",score)
+
+            //place the correct answer in a hidden input
+            console.log("this is the correct index", correctIndex)
+            $(parent).html(`<form action="#" class='q-form question-form'><h5>${question}</h5><input type='hidden' name='index' value='${correctIndex}'><div class='form-mat'><input class="'question-form an-answer" type="radio" name="index" value="0" ><label>${answers[0]}</label></div><div class='form-mat'><input class="'question-form an-answer" type="radio" name="index" value="1" ><label>${answers[1]}</label></div><div class='form-mat'><input class="'question-form an-answer" type="radio" name="index" value="2" ><label>${answers[2]}</label></div><div class='form-mat'><input class="'question-form an-answer" type="radio" name="index" value="3" ><label>${answers[3]}</label></div><button type='submit' class="question-form an-answer">ENTER</button><input type='hidden' name='score' value='${score}'></form>`);
+                    
+            $(".q-form").hide();
+            $('.q-form').slideDown();
+                    
+            };
+        };   
+function formmatAnswer(answer){
+    answer = answer.split('&');
+    answer[0] = answer[0].split('=')
+    answer[1] = answer[1].split('=')
+    answer[2] = answer[2].split('=')
+    
+    answer[0] = answer[0][1]
+    answer[1] = answer[1][1]
+    answer[2] = answer[2][1]
+    return answer
+}
+function submitQuestion(parent){
+    $(".q-form").submit(function(){
+    console.log('form button')
+    var answer = $(this).serialize()
+    //format answers
+    answer = formmatAnswer(answer);
+
+    checkAnswer(parent,answer);
+
+    console.log("this is the answer", answer);
+    //hide the form
+    $(this).slideUp();
+    return false
+});
+}        
+function checkAnswer(parent,answer){
+    if(answer[0] == answer[1] ){
+        console.log('answer if triggerd', answer)
+        correctAnimation(parent,answer[2]);
+        let currentScore = $('span').html();
+        $('span').html(parseInt(currentScore)+parseInt(answer[2]));
+    }else{
+        console.log('incorrect triggerd')
+        incorrectAnimation(parent,answer[2]);
+    }
+
+}
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function correctAnimation(parent,scoreVal){
+$(parent).hide(function(){
+    $(this).html("<p class='result'>CORRECT</p>");
+    $(this).slideDown(800,function(){
+        //like the animations to work one after the other.
+        $('.result').slideDown(2000,function(){
+            $(parent).hide(600,function(){
+                //insert a fresh question
+                $(this).html("<p>"+scoreVal+"</p>");
+                $(this).slideDown(800);
+            })
+        });
+    })
+});
+}
+function incorrectAnimation(parent,scoreVal){
+$(parent).hide(function(){
+    $(this).html("<p class='result'>INCORRECT</p>");
+    $(this).slideDown(800,function(){
+        //like the animations to work one after the other.
+        $('.result').slideDown(2000,function(){
+            $(parent).hide(600,function(){
+                //insert a fresh question
+                $(this).html("<p>"+scoreVal+"</p>");
+                $(this).slideDown(800);
+            })
+        });
+    })
+});
+}
+            </script>
+            <title>Document</title>
+</head>
+<body>
+    <h1>TRIVA</h1>
+    <H2><span>0</span> points</H2>
+    <div class="col">
+        <h4>CATAGORY</h4>
+        
+        <div class="question"><p>100</p></div>
+        
+        <div class="question"><p>200</p></div>
+        
+        <div class="question"><p>300</p></div>
+        
+        </div>
+        <div class="col">
+            <h4>CATAGORY</h4>
+            
+            <div class="question"><p>100</p></div>
+            
+        <div class="question"><p>200</p></div>
+
+        <div class="question"><p>300</p></div>
+        
+    </div>
+    <div class="col">
+        <h4>CATAGORY</h4>
+        
+        <div class="question"><p>100</p></div>
+
+        <div class="question"><p>200</p></div>
+
+        <div class="question"><p>300</p></div>
+            
+    </div>
+</body>
+</html>
