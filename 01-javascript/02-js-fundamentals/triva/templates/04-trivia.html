@@ -58,9 +58,9 @@
     <script>
         $(document).ready(function(){
             //histroy easy
-            // $.get('https://opentdb.com/api.php?amount=3&category=23&difficulty=easy&type=multiple')
-            // //art
-            // $.get('https://opentdb.com/api.php?amount=3&category=25&difficulty=easy&type=multiple')
+            $.get('https://opentdb.com/api.php?amount=3&category=23&difficulty=easy&type=multiple')
+            //art
+            $.get('https://opentdb.com/api.php?amount=3&category=25&difficulty=easy&type=multiple')
             
             $(".question").click(function(){
                 let contents = $(this).html();
@@ -88,6 +88,7 @@
 function displayForm(parent,difficulty,category){
     $.get(`https://opentdb.com/api.php?amount=1&category=${category}&difficulty=${difficulty}&type=multiple`, displayQuestions);
         function displayQuestions(data){
+            console.log('this is the data',data);
             console.log(data.results[0].question)
 
             let question = data.results[0].question;
@@ -126,7 +127,9 @@ function formmatAnswer(answer){
     return answer
 }
 function submitQuestion(parent){
-    $(".q-form").submit(function(){
+    $(".q-form").submit(function(event){
+        event.preventDefault();
+        event.stopPropagation();
     console.log('form button')
     var answer = $(this).serialize()
     //format answers
@@ -135,9 +138,6 @@ function submitQuestion(parent){
     checkAnswer(parent,answer);
 
     console.log("this is the answer", answer);
-    //hide the form
-    $(this).slideUp();
-    return false
 });
 }        
 function checkAnswer(parent,answer){
