@@ -8,50 +8,12 @@ class Card{
     }
 
     show(){
-        console.log(`the ${this.value} of ${htis.suit}`);
+        console.log('the '+this.value+" of "+htis.suit);
     }
-}
-function cardSort(cards){
-    let bigCatcher =cards[0];
-    let lilCatcher = cards[0];
-    for(var i = 0; i < cards.length; i++){
-        lilCatcher =cards[i];
-        if(lilCatcher.number > bigCatcher.number){
-        bigCatcher = lilCatcher;
-        }
-    if( bigCatcher.number > lilCatcher.number){
-        lilCatcher = cards[i];
-        cards[i-1]=lilCatcher;
-        cards[i]=bigCatcher;
-        var j = i + 1;
-        i = 0
-        bigCatcher = cards[0]
-    }
-
-    }
-    return cards
-}
-function suitSort(cards){
-    let bigCatcher =cards[0];
-    let lilCatcher = cards[0];
-    for(var i = 0; i < cards.length; i++){
-        lilCatcher =cards[i];
-        if(lilCatcher.suit > bigCatcher.suit){
-            bigCatcher = lilCatcher;
-        }
-        if( bigCatcher.suit > lilCatcher.suit){
-            lilCatcher = cards[i];
-            cards[i-1]=lilCatcher;
-            cards[i]=bigCatcher;
-            i = 0
-            bigCatcher = cards[0]
-    }
-
-    }
-    return cards
 }
 class Deck{
     constructor(){
+      this.shuffled = false;
         this.cards = [];
         const suits = ['Hearts','Clubs','Spades','Diamonds'];
         for(let j = 0; j < suits.length; j++){
@@ -62,8 +24,9 @@ class Deck{
             }
         }
     }
-    shuffle(cards){
-        let end = cards.length, holder, randomIndex;
+    shuffle(){
+      this.shuffled = true
+        let end = this.cards.length, holder, randomIndex;
 
         // While there remain elements to shuffle…
         while (end) {
@@ -72,37 +35,109 @@ class Deck{
           randomIndex = Math.floor(Math.random() * end--);
       
           // And swap it with the current element.
-          holder = cards[end];
-          cards[end] = cards[randomIndex];
-          cards[randomIndex] = holder;
+          holder = this.cards[end];
+          this.cards[end] = this.cards[randomIndex];
+          this.cards[randomIndex] = holder;
         }
    }
     reset(){
+        this.shuffled = false
         let hearts = [],
          spades =  [],
-         daimons = [],
-         club = [];
+         diamonds = [],
+         clubs = [],
+         holder = [];
 
-         for(let i = 0; i < this.cards.length; i++){
+         for(var i = 0; i < this.cards.length; i++){
              if(this.cards[i].suit === 'Spades'){
-                 
+                spades[this.cards[i].number-1]=this.cards[i]
+             }
+             if(this.cards[i].suit === 'Diamonds'){
+                diamonds[this.cards[i].number-1]=this.cards[i]
+             }
+             if(this.cards[i].suit === 'Clubs'){
+                clubs[this.cards[i].number-1]=this.cards[i]
+             }
+             if(this.cards[i].suit === 'Hearts'){
+                hearts[this.cards[i].number-1]=this.cards[i]
              }
          }
-        this.cards = new Deck();
-        //sort by suit/. each suit = array
-        //while sorting suit/ insert card at index card.number-1
-        //loop all arrays. push active index into hand
-    };
+         for(i=0;i<spades.length; i++){
+             if(spades[i]){
+                 holder.push(spades[i]);
+             }
+         }
+         for(i=0;i<diamonds.length; i++){
+             if(diamonds[i]){
+                 holder.push(diamonds[i]);
+             }
+         }
+         for(i=0;i<clubs.length; i++){
+             if(clubs[i]){
+                 holder.push(clubs[i]);
+             }
+         }
+         for(i=0;i<hearts.length; i++){
+             if(hearts[i]){
+                 holder.push(hearts[i]);
+             }
+         }
+        this.cards = holder;
+  
+    }
             
 
     deal(){
-        let card = this.cards.pop();
-        return card;
+        if(this.shuffled){
+          let card = this.cards.pop();
+          return card;
+        }else{
+          throw new Error("please shuffle the deck first")
+        }
     }
 }
 
 class Player{
-    constructor(){
-        
+    constructor(name,cards){
+        this.name = name;
+        this.hand = [];
+        while(this.hand.length < 5){
+          console.log("in while")
+            this.hand.push(cards.deal())
+        }
+    }
+    take(cards){
+        this.hand.push(cards.deal());
+    }
+    discard(cardIndex,deck){
+        let discard = this.hand[cardIndex],
+        holder = [];
+      
+        deck.cards.push(discard);
+        for(let card in this.hand){
+            if(this.hand[card] != discard){
+                holder.push(this.hand[card])
+            }
+        }
+        this.hand = holder;
     }
 }
+
+var deck = new Deck();
+deck.shuffle()
+
+var hector = new Player('hector',deck);
+console.log("this is hand before",hector.hand)
+hector.discard(4,deck);
+console.log('this is hand after',hector.hand)
+hector.take(deck)
+console.log('this is hand after take', hector.hand)
+
+
+
+
+
+
+
+
+
