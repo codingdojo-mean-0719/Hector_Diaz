@@ -28,7 +28,7 @@ var server = http.createServer(function (request, response){
             response.end(); // finished!
         });
     }
-    // if(request.url === '/stylesheet/style.css') {
+    // else if(request.url === '/stylesheet/style.css') {
     //     fs.readFile('style.css', 'utf8', function (errors, contents){
     //         response.writeHead(200, {'Content-Type': 'text/css'});  // send data about response
     //         response.write(contents);  //  send response body
