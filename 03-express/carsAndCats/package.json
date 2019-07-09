@@ -1,0 +1,24 @@
+{
+  "name": "carsandcats",
+  "version": "1.0.0",
+  "description": "show some cool pictures of cats and cars",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codingdojo-mean-0719/Hector_Diaz/tree/master/03-express"
+  },
+  "keywords": [
+    "cats",
+    "cars",
+    "images"
+  ],
+  "author": "hector",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
