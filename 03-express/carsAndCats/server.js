@@ -13,6 +13,15 @@ app.get('/cars', function(request,response){
 app.get('/cats', function(request,response){
     response.render('cats');
 });
+
+app.get('/cat', function(request,response){
+    var name = "A Cat",
+    catPictuer = Math.floor(Math.random()*3)
+    age = "3",
+    napSpot = ['sleeping spor', 'napping spot'];
+    response.render('aCat',{name:name,age:age,napSpot:napSpot,catpic:catPictuer});
+});
+
 app.get('/cars/new', function(request,response){
     response.render('form');
 });
