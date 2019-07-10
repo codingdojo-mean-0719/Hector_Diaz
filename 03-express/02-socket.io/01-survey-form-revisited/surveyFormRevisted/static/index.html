@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        $(document).ready(()=>{
+            var socket = io();
+            $("#form").on('submit',function(event){
+                let el = document.getElementById("name");
+                event.preventDefault();
+                // console.log("this is ",$("#form"));
+                // console.log("here is the name:" , el.value);
+               const formData = Array.from( $(this).children())
+                .filter(el => el.name)
+                .reduce((memo,element)=>{
+                   console.log("the element", element, element.name, element.value);
+                    console.log(memo);
+                   return {
+                       ...memo,
+                       [element.name]: element.value
+                   }
+               },{});
+                console.log('here is the form data', formData);
+                socket.emit('post', formData);
+               
+            });
+            socket.on('get',(formData)=>{
+                console.log('recieved', formData)
+                $(".socketMessage").html(`
+                <p class='message' >You emitted the following information to the server</p>
+                <p>{Name: ${formData.name}, Dojo: ${formData.dojo}, Favorite Language: ${formData.favLanguage}, Comment: ${formData.comment}</p>
+                `)
+            });
+            socket.on('YourLuckyNumber', (lucky)=>{
+                console.log("caught a number", lucky.number)
+                $('form').before(`
+                <p>${lucky.number}</p>
+                 `);
+            
+            });
+            })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="socketMessage">
+    </div>
+    <form id="form" action="/posting/Form" method="POST">
+        Name: <input id="name" type="text" name="name">
+        Dojo Location: <select name="dojo">
+            <option value="Boise,ID">BOISE,ID</option>
+            <option value="San Francisco,CA">SAN FRANCISCO,CA</option>
+            <option value="Online">FULL TIME ONLINE</option>
+        </select>
+        Favorite Language: <select name="favLanguage" >
+            <option value="Python">PYTHON</option>
+            <option value="JavaScript">JAVASCRIPT</option>
+            <option value="Java">JAVA</option>
+        </select>
+        Comment (Optional): <textarea name="comment" cols="30" rows="10">
+        </textarea>
+        <button type="submit">SUBMIT</button>
+    </form>
+</body>
+</html>

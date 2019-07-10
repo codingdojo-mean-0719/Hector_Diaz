@@ -1,0 +1,19 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+
+div{
+    height: 200px;
+    text-align: center;
+
+    /* background-color: olivedrab; */
+    /* color: white; */
+    font-weight: normal;
+}
+.message{
+    margin-top: 50px;
+}
+p{
+    display: inline-block;
+}
