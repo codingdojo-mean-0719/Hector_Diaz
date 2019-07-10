@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/submit" method="POST">
+        Name: <input type="text" name="name">
+        Dojo Location: <select name="dojo">
+            <option value="Boise,ID">BOISE,ID</option>
+            <option value="San Francisco,CA">SAN FRANCISCO,CA</option>
+            <option value="Online">FULL TIME ONLINE</option>
+        </select>
+        Favorite Language: <select name="favLanguage" >
+            <option value="Python">PYTHON</option>
+            <option value="JavaScript">JAVASCRIPT</option>
+            <option value="Java">JAVA</option>
+        </select>
+        Comment (Optional): <textarea name="comment" cols="30" rows="10">
+        </textarea>
+        <button type="submit">SUBMIT</button>
+    </form>
+</body>
+</html>
