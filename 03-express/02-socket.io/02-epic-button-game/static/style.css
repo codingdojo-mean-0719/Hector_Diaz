@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+    padding-top: 200px;
+}
+.epic-button{
+    height: 200px;
+    padding: 50px;
+    display: inline-block;
+    margin-bottom: 30px;
+    border-radius: 15%;
+}
+.button-block{
+    display: block;
+}

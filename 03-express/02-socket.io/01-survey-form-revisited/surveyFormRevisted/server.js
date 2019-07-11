@@ -32,15 +32,3 @@ app.use(session({
   }));
 
 
-
-// app.post("/submit", function(request,response){
-//     request.session.name = request.body.name;
-//     request.session.dojo = request.body.dojo;
-//     request.session.favLanguage = request.body.favLanguage;
-//     request.session.comment = request.body.comment;
-//     response.redirect('/result');
-// })
-
-// app.get('/result',(request,response)=>{
-//     response.render('result',{name:request.session.name,location:request.session.dojo,language:request.session.favLanguage,comment:request.session.comment});
-// })
