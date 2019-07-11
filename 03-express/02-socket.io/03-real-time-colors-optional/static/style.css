@@ -1,0 +1,24 @@
+.teal{
+    background-color: aqua;
+}
+
+.pink{
+    background-color: orchid;
+}
+
+.yellow{
+    background-color: gold;
+}
+
+body{
+    text-align: center;
+    padding-top: 200px;
+}
+
+button{
+    height: 100px;
+    width: 200px;
+    margin: 30px, 0px;
+
+    border-radius: 15%;
+}

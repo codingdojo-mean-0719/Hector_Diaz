@@ -10,7 +10,6 @@ const app = express();
 const server = app.listen(8000,()=>{console.log("listening on port 8000")});
 const io = require('socket.io')(server);
 let counter = 0;
-console.log('press app', counter)
 
 app.get('/', function(request, response) {
     console.log('get counter', counter)
