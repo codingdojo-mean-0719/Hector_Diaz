@@ -1,0 +1,644 @@
+C:\Program Files\MongoDB\Server\4.0\bin>mongo.exe
+MongoDB shell version v4.0.10
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("a246d989-ab5a-4184-a358-2be7d415b94b") }
+MongoDB server version: 4.0.10
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        http://docs.mongodb.org/
+Questions? Try the support group
+        http://groups.google.com/group/mongodb-user
+Server has startup warnings:
+2019-07-14T09:48:11.782-0700 I CONTROL  [initandlisten]
+2019-07-14T09:48:11.782-0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-07-14T09:48:11.783-0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-07-14T09:48:11.783-0700 I CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use my_first_db
+switched to db my_first_db
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> show collection
+2019-07-14T14:24:39.776-0600 E QUERY    [js] Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1066:11
+shellHelper@src/mongo/shell/utils.js:766:15
+@(shellhelp2):1:1
+> show collections
+> db.creatCollection('students')
+2019-07-14T14:25:29.925-0600 E QUERY    [js] TypeError: db.creatCollection is not a function :
+@(shell):1:1
+> db.createCollection('students')
+{ "ok" : 1 }
+> db.students.insert({'name:nameA','home_state:'AA',lucky_Number:1,birthday:{month:1,day:1,year:1111}})
+2019-07-14T14:31:43.612-0600 E QUERY    [js] SyntaxError: missing : after property id @(shell):1:32
+> db.students.insert({name:'nameA',home_state:'AA',lucky_Number:1,birthday:{month:1,day:1,year:1111}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'nameB',home_state:'BB',lucky_Number:2,birthday:{month:2,day:2,year:2222}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'nameC',home_state:'CC',lucky_Number:3,birthday:{month3,day:3,year:3333}})
+2019-07-14T14:34:13.578-0600 E QUERY    [js] ReferenceError: month3 is not defined :
+@(shell):1:75
+> db.students.insert({name:'nameC',home_state:'CC',lucky_Number:3,birthday:{month:3,day:3,year:3333}})
+WriteResult({ "nInserted" : 1 })
+> show collections
+students
+> show documents
+2019-07-14T14:34:54.856-0600 E QUERY    [js] Error: don't know how to show [documents] :
+shellHelper.show@src/mongo/shell/utils.js:1066:11
+shellHelper@src/mongo/shell/utils.js:766:15
+@(shellhelp2):1:1
+> db.students.insert({name:'nameD',home_state:'DD',lucky_Number:4,birthday:{month:4,day:4,year:4444}})
+WriteResult({ "nInserted" : 1 })
+> db.students.insert({name:'nameE',home_state:'EE',lucky_Number:5,birthday:{month:5,day:5,year:5555}})
+WriteResult({ "nInserted" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        }
+}
+{
+        "_id" : ObjectId("5d2b91a0cec5248a93881c88"),
+        "name" : "nameB",
+        "home_state" : "BB",
+        "lucky_Number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 2,
+                "year" : 2222
+        }
+}
+{
+        "_id" : ObjectId("5d2b91dacec5248a93881c89"),
+        "name" : "nameC",
+        "home_state" : "CC",
+        "lucky_Number" : 3,
+        "birthday" : {
+                "month" : 3,
+                "day" : 3,
+                "year" : 3333
+        }
+}
+{
+        "_id" : ObjectId("5d2b9226cec5248a93881c8a"),
+        "name" : "nameD",
+        "home_state" : "DD",
+        "lucky_Number" : 4,
+        "birthday" : {
+                "month" : 4,
+                "day" : 4,
+                "year" : 4444
+        }
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        }
+}
+> db.students.find({$or[{home_state:'DD'},{home_state:'CC'}]})
+2019-07-14T15:35:49.525-0600 E QUERY    [js] SyntaxError: missing : after property id @(shell):1:21
+> db.students.find({$or:[{home_state:'DD'},{home_state:'CC'}]})
+{ "_id" : ObjectId("5d2b91dacec5248a93881c89"), "name" : "nameC", "home_state" : "CC", "lucky_Number" : 3, "birthday" : { "month" : 3, "day" : 3, "year" : 3333 } }
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 } }
+> db.students.find({lucky:{$lt:3}})
+> db.students.find({lucky_number:{$lt:3}})
+> db.students.find({lucky_Number:{$lt:3}})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 } }
+{ "_id" : ObjectId("5d2b91a0cec5248a93881c88"), "name" : "nameB", "home_state" : "BB", "lucky_Number" : 2, "birthday" : { "month" : 2, "day" : 2, "year" : 2222 } }
+> db.students.find({lucky_Number:{$gt:3}})
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 } }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 } }
+> '
+2019-07-14T16:04:27.756-0600 E QUERY    [js] SyntaxError: unterminated string literal @(shell):1:0
+> db.students.find({lucky_Number:{$lte:10}})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 } }
+{ "_id" : ObjectId("5d2b91a0cec5248a93881c88"), "name" : "nameB", "home_state" : "BB", "lucky_Number" : 2, "birthday" : { "month" : 2, "day" : 2, "year" : 2222 } }
+{ "_id" : ObjectId("5d2b91dacec5248a93881c89"), "name" : "nameC", "home_state" : "CC", "lucky_Number" : 3, "birthday" : { "month" : 3, "day" : 3, "year" : 3333 } }
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 } }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 } }
+> db.students.find({$or:[{lucky_Number:{$lte:5}},{lucky_Number:{$gte:2}}]})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 } }
+{ "_id" : ObjectId("5d2b91a0cec5248a93881c88"), "name" : "nameB", "home_state" : "BB", "lucky_Number" : 2, "birthday" : { "month" : 2, "day" : 2, "year" : 2222 } }
+{ "_id" : ObjectId("5d2b91dacec5248a93881c89"), "name" : "nameC", "home_state" : "CC", "lucky_Number" : 3, "birthday" : { "month" : 3, "day" : 3, "year" : 3333 } }
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 } }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 } }
+> db.students.find({lucky_Number:{$lte:5}},{lucky_Number:{$gte2}})
+2019-07-14T16:11:35.470-0600 E QUERY    [js] ReferenceError: $gte2 is not defined :
+@(shell):1:57
+> db.students.find({lucky_Number:{$lte:5}},{lucky_Number:{$gte:2}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: lucky_Number: { $gte: 2.0 }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.students.find({$and:[{lucky_Number:{$lte:5}},{lucky_Number:{$gte:2}}]})
+{ "_id" : ObjectId("5d2b91a0cec5248a93881c88"), "name" : "nameB", "home_state" : "BB", "lucky_Number" : 2, "birthday" : { "month" : 2, "day" : 2, "year" : 2222 } }
+{ "_id" : ObjectId("5d2b91dacec5248a93881c89"), "name" : "nameC", "home_state" : "CC", "lucky_Number" : 3, "birthday" : { "month" : 3, "day" : 3, "year" : 3333 } }
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 } }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 } }
+> db.students.aggregate([$addFields({interest:['interestA','interestB','interestC']})])
+2019-07-14T16:33:10.787-0600 E QUERY    [js] ReferenceError: $addFields is not defined :
+@(shell):1:24
+> db.students.aggregate([$addFields:{interest:['interestA','interestB','interestC']}])
+2019-07-14T16:33:42.393-0600 E QUERY    [js] SyntaxError: missing ] after element list @(shell):1:33
+> db.students.aggregate($addFields:{interest:['interestA','interestB','interestC']})
+2019-07-14T16:34:33.759-0600 E QUERY    [js] SyntaxError: missing ) after argument list @(shell):1:32
+> db.students.aggregate([{$addFields:{interest:['interestA','interestB','interestC']}}])
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 }, "interest" : [ "interestA", "interestB", "interestC" ] }
+{ "_id" : ObjectId("5d2b91a0cec5248a93881c88"), "name" : "nameB", "home_state" : "BB", "lucky_Number" : 2, "birthday" : { "month" : 2, "day" : 2, "year" : 2222 }, "interest" : [ "interestA", "interestB", "interestC" ] }
+{ "_id" : ObjectId("5d2b91dacec5248a93881c89"), "name" : "nameC", "home_state" : "CC", "lucky_Number" : 3, "birthday" : { "month" : 3, "day" : 3, "year" : 3333 }, "interest" : [ "interestA", "interestB", "interestC" ] }
+{ "_id" : ObjectId("5d2b9226cec5248a93881c8a"), "name" : "nameD", "home_state" : "DD", "lucky_Number" : 4, "birthday" : { "month" : 4, "day" : 4, "year" : 4444 }, "interest" : [ "interestA", "interestB", "interestC" ] }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 }, "interest" : [ "interestA", "interestB", "interestC" ] }
+> db.students.update({$add
+... 'd;lamf
+2019-07-14T16:36:31.721-0600 E QUERY    [js] SyntaxError: unterminated string literal @(shell):2:0
+> db.students.find({"id":ObjectId("5d2b91a0cec524a93881c88")},{$addToSet:{interest:'interest1'}})
+2019-07-14T16:40:19.069-0600 E QUERY    [js] Error: invalid object id: length :
+@(shell):1:24
+> db.students.find({"id":ObjectId("5d2b916fcec5248a93881c87")},{$addToSet:{interest:'interest1'}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: $addToSet: { interest: \"interest1\" }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.students.find({"id":ObjectId("5d2b916fcec5248a93881c87")},{$addToSet:{interests:'interest1'}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: $addToSet: { interests: \"interest1\" }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.students.find({"id":ObjectId("5d2b916fcec5248a93881c87")},{$addToSet:{interest:"interest1"}})
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "Unsupported projection option: $addToSet: { interest: \"interest1\" }",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.students.update({"id":ObjectId("5d2b916fcec5248a93881c87")},{$addToSet:{interest:"interest1"}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.students.find({"id":ObjectId("5d2b916fcec5248a93881c87")})
+> db.students.find({name:'nameA'})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 } }
+> db.students.find({"_id":ObjectId("5d2b916fcec5248a93881c87")})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 } }
+> db.students.update({"_id":ObjectId("5d2b916fcec5248a93881c87")},{$addToSet:{interest:"interest1"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find({"_id":ObjectId("5d2b916fcec5248a93881c87")})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 }, "interest" : [ "interest1" ] }
+> db.students.update({"_id":ObjectId("5d2b91a0cec5248a93881c88")},{$addToSet:{interest:"interest2"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({"_id":ObjectId("5d2b91dacec5248a93881c89")},{$addToSet:{interest:"interest2"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({"_id":ObjectId("5d2b9226cec5248a93881c8a")},{$addToSet:{interest:"interest2"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({"_id":ObjectId("5d2b924ccec5248a93881c8b")},{$addToSet:{interest:"interest2"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({"_id":ObjectId("5d2b924ccec5248a93881c8b")},{$addToSet:{interest:"taxes"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.update({"_id":ObjectId("5d2b924ccec5248a93881c8b")},{$pull:{interest:"taxes"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find({"_id":ObjectId("5d2b924ccec5248a93881c8b")}).pretty()
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+>
+> db.students.remove({home_state:'CC'})
+WriteResult({ "nRemoved" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b91a0cec5248a93881c88"),
+        "name" : "nameB",
+        "home_state" : "BB",
+        "lucky_Number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 2,
+                "year" : 2222
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b9226cec5248a93881c8a"),
+        "name" : "nameD",
+        "home_state" : "DD",
+        "lucky_Number" : 4,
+        "birthday" : {
+                "month" : 4,
+                "day" : 4,
+                "year" : 4444
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.remove({name:'nameD'})
+WriteResult({ "nRemoved" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b91a0cec5248a93881c88"),
+        "name" : "nameB",
+        "home_state" : "BB",
+        "lucky_Number" : 2,
+        "birthday" : {
+                "month" : 2,
+                "day" : 2,
+                "year" : 2222
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.remove({lucky_Number:{$gt:1}},true)
+WriteResult({ "nRemoved" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.aggergate({$addFields:{number_of_belts:0}})
+2019-07-14T17:05:19.528-0600 E QUERY    [js] TypeError: db.students.aggergate is not a function :
+@(shell):1:1
+> db.students.aggergate([{$addFields:{number_of_belts:0}}])
+2019-07-14T17:05:43.703-0600 E QUERY    [js] TypeError: db.students.aggergate is not a function :
+@(shell):1:1
+> db.students.aggregate({$addFields:{number_of_belts:0}})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 }, "interest" : [ "interest1" ], "number_of_belts" : 0 }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 }, "interest" : [ "interest2" ], "number_of_belts" : 0 }
+> config  0.000GB
+2019-07-14T17:06:58.836-0600 E QUERY    [js] SyntaxError: identifier starts immediately after numeric literal @(shell):1:8
+> db.students.update({home_state: 'AA'},{$inc: {number_of_belts: 1})
+...
+... ^C
+
+> ^C
+bye
+
+C:\Program Files\MongoDB\Server\4.0\bin>mongo.exe
+MongoDB shell version v4.0.10
+connecting to: mongodb://127.0.0.1:27017/?gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("53bbca46-4c4b-4dd5-a4ba-86493a7bd091") }
+MongoDB server version: 4.0.10
+Server has startup warnings:
+2019-07-14T09:48:11.782-0700 I CONTROL  [initandlisten]
+2019-07-14T09:48:11.782-0700 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2019-07-14T09:48:11.783-0700 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2019-07-14T09:48:11.783-0700 I CONTROL  [initandlisten]
+---
+Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+and anyone you share the URL with. MongoDB may use this information to make product
+improvements and to suggest MongoDB products and deployment options to you.
+
+To enable free monitoring, run the following command: db.enableFreeMonitoring()
+To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+
+> use students
+switched to db students
+> show collections
+> show dbs
+admin        0.000GB
+config       0.000GB
+local        0.000GB
+my_first_db  0.000GB
+> use my_fi
+switched to db my_fi
+> use my_first_db
+switched to db my_first_db
+> show collections
+students
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.aggregate({$addField:{number_of_belts:0})
+... db.students.find().pretty()
+...
+...
+>
+>
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.student.aggregate({$addFields:{number_of_belts:0}})
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ]
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.aggregate({$addFields:{number_of_belts:0}})
+{ "_id" : ObjectId("5d2b916fcec5248a93881c87"), "name" : "nameA", "home_state" : "AA", "lucky_Number" : 1, "birthday" : { "month" : 1, "day" : 1, "year" : 1111 }, "interest" : [ "interest1" ], "number_of_belts" : 0 }
+{ "_id" : ObjectId("5d2b924ccec5248a93881c8b"), "name" : "nameE", "home_state" : "EE", "lucky_Number" : 5, "birthday" : { "month" : 5, "day" : 5, "year" : 5555 }, "interest" : [ "interest2" ], "number_of_belts" : 0 }
+> db.students.update({home_state: 'AA'},{$inc:{number_of_belts:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ],
+        "number_of_belts" : 1
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.aggregate({$rename:{'number_of_belts': 'belts_earned'}})
+2019-07-14T17:28:38.533-0600 E QUERY    [js] Error: command failed: {
+        "ok" : 0,
+        "errmsg" : "Unrecognized pipeline stage name: '$rename'",
+        "code" : 40324,
+        "codeName" : "Location40324"
+} : aggregate failed :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+doassert@src/mongo/shell/assert.js:18:14
+_assertCommandWorked@src/mongo/shell/assert.js:536:17
+assert.commandWorked@src/mongo/shell/assert.js:620:16
+DB.prototype._runAggregate@src/mongo/shell/db.js:260:9
+DBCollection.prototype.aggregate@src/mongo/shell/collection.js:1062:12
+@(shell):1:1
+> db.students.updateMany({},{$rename:{'number_of_belts':'belts_earned'}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 1 }
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "lucky_Number" : 1,
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ],
+        "belts_earned" : 1
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "lucky_Number" : 5,
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
+> db.students.updateMany({},{$unset:{'lucky_Number'}})
+2019-07-14T17:33:14.361-0600 E QUERY    [js] SyntaxError: missing : after property id @(shell):1:49
+> db.students.updateMany({},{$unset:{lucky_Number:''}})
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.students.find().pretty()
+{
+        "_id" : ObjectId("5d2b916fcec5248a93881c87"),
+        "name" : "nameA",
+        "home_state" : "AA",
+        "birthday" : {
+                "month" : 1,
+                "day" : 1,
+                "year" : 1111
+        },
+        "interest" : [
+                "interest1"
+        ],
+        "belts_earned" : 1
+}
+{
+        "_id" : ObjectId("5d2b924ccec5248a93881c8b"),
+        "name" : "nameE",
+        "home_state" : "EE",
+        "birthday" : {
+                "month" : 5,
+                "day" : 5,
+                "year" : 5555
+        },
+        "interest" : [
+                "interest2"
+        ]
+}
