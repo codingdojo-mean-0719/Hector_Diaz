@@ -1,0 +1,279 @@
+*{  
+    /* outline: 3px dotted red; */
+    margin: 0px;
+    padding: 0px; 
+    color: rgb(122, 54, 23);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(252, 125, 125);
+}
+
+::-webkit-scrollbar-track {
+    width: 10px;
+
+    border-right: 5px dotted gold; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background:rgb(77, 219, 160); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+    background:aqua; 
+}   
+::-webkit-scrollbar-thumb:active {
+    background:rgb(41, 151, 105); 
+}   
+ 
+
+::-webkit-input-placeholder{
+    color: aqua;
+    font-size: 12px;
+}
+
+header{
+    padding: 10px;
+}
+h1{
+    display: inline-block;
+}
+div form h3{
+    margin: 0px;
+    margin-bottom: 30px;
+    display: inline-block;
+    
+    font-weight: lighter;
+    color: white;
+}
+h2{
+    display: inline-block;
+    font-weight: lighter;
+}
+section{
+    display: inline-block;
+    vertical-align: top;
+    padding: 0px 100px 0px 50px;
+    width: 400px;
+    height: 700px;
+}
+aside{
+    margin: 0px 30px;
+    height: 600px;
+    width:350px;
+    /* padding: 20px; */
+    display: inline-block;
+    vertical-align: top;
+}
+p{
+    margin: 30px 0px;
+    padding: 20px;
+    text-align: end; 
+
+    box-shadow: 5px 5px 7px rgba(0, 0, 128, 0.527);
+}
+small{
+    padding: 10px;
+    display: block;
+}
+form{
+    display: inline-block;
+}
+button{
+    all:unset;
+}
+button:hover{
+    color: rgb(250, 93, 145);
+}
+button:active{
+    color: rgb(18, 19, 75);
+    background-color: rgb(250, 93, 145);
+
+}
+
+.info{
+    color: aqua;
+}
+.scrolling{
+    overflow-y:auto; 
+}
+
+.headerStyling{
+    color: aqua;
+    background-color: rgb(41, 151, 105);
+    border-bottom: 3px solid rgb(77, 219, 160);
+}
+.userName{
+    display: inline;
+    padding-left: 75%;
+
+    text-align: right;
+    font-weight: normal;
+    box-shadow: none;
+}
+.userNameStyling{
+    color: white;
+}
+.wrap{
+    height: 100%;
+    padding: 20px 50px 0px 20%;
+}
+.wrapStyling{
+    background-color: rgb(252, 125, 125);
+    background-image: linear-gradient(-20deg rgb(252, 125, 125) )
+}
+
+.headerColor{
+    color: white;
+}
+.displayMessages{
+    margin-left: 30%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 10px;
+
+    border-radius: 5%; 
+}
+.displayMessagesStyling{
+   
+    border: 1px solid aqua;
+
+}
+button.displayMessages:hover{
+    border: none;
+    color: aqua;
+    padding: 11px
+}
+button.displayMessages:active{
+    background-color: rgb(250, 93, 145);
+
+}
+.messagesDisplayArea{
+    height: 350px;
+    width: 340px;
+    margin-top: 50px;   
+    padding: 0px 30px;
+    display: inline-block;
+    
+    box-shadow: 5px 10px 6px rgba(0, 0, 128, 0.527);
+}
+.messages{
+    padding-top: 0px;
+    width: 70%;
+    /* background-color: rgba(255, 255, 255, 0.644); */
+    border-radius: 15px;
+}
+.userMessage{
+    margin-left: 15%;
+    margin-right: 0px;
+    color: white;
+}
+.senderStyling{
+    color:gold;
+}
+.sendMessageForm{
+    margin: 30px auto 15px auto;
+}
+.newMessage{
+    margin-top: 80px;
+    width: 342px;
+    border: none;
+    font-size: 0px;
+}
+.newMessageStyling{
+    width:auto;
+    margin-top: 0px;
+    padding: 5px;
+    font-size: 18px;
+    color: white;
+    border-bottom: 2px solid gold;
+    background-color: rgb(250, 93, 145);
+
+}
+.sendButton{
+    padding: 5px;
+    position: relative;
+    bottom: 36px;
+    left: 20px;
+
+}
+.sendButtonStyling{
+    color: aqua;
+    background-color: rgb(122, 54, 23);
+    border-radius: 5%;
+}
+
+.line{
+    position: fixed;
+    top: 15%;
+    left: 800px;
+    width: 3px;
+    height: 500px;
+
+    border-radius: 1.5px;
+    background-color:  rgb(18, 19, 75);
+}
+.lineStyling{
+    background-color: gold;
+}
+
+.whosInChatRoom{
+    margin: 0px 30px;
+    height: 600px;   
+ }
+.whosInChatRoom div{
+    width: 300px;
+    height: 500px;
+    padding: 20px
+}
+.chatHeader{
+    margin-left: 30%;
+}
+.currentUserStyling{
+    font-weight: bold;
+}
+
+.nameFormWrap{
+    position: absolute;
+    /* position: fixed; */
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    bottom:10px;
+    
+    background-color: rgba(255, 0, 200, 0.507);
+}
+.nameForm{
+    width: 300px;
+    position: relative;
+    top: 40%;
+    padding: 30px 50px;
+
+    border-radius: 2%;
+    background-color: rgb(18, 19, 75);
+    color:white;
+    box-shadow: 5px -5px 7px rgba(0, 0, 128, 0.527);
+    font-weight: lighter;
+
+}
+.name{
+    height: 30px;
+    display: block;
+    margin: 0px auto 20px auto;
+    
+    border: none;
+    background: gold;
+}
+.nameButton{
+    background-color: rgb(18, 19, 75);
+    border: none;
+    color: aqua;
+}
+
+
