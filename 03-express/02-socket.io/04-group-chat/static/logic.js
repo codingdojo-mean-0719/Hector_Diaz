@@ -24,7 +24,7 @@ $(document).ready(function(){
     $('.nameForm').submit( function(event){
         const thisForm = this;
         event.preventDefault()
-        const formData = formDataFormat('name',thisForm);
+        const formData = formDataFormat(thisForm);
      
         if(formData.name.trim() === ''){
         // $('.nameForm.info').slideUp()

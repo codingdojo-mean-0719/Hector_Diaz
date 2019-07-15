@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script  src="/logic.js" ></script>
+    <title>Quoting Dojo</title>
+</head>
+<body>
+    <form action="/" method='POST'>
+        <h1>welcome to qouting dojo</h1>
+        name: <input type="text" name="name">
+        <textarea name="quote" id="" cols="30" rows="10"></textarea>
+        <button type="button">skip to qoutes</button>
+        <button type="submit">add my quote</button>
+    </form>
+    <section style="display: none">
+        <h2>here are the qoutes</h2>
+        <p>"qoute"</p>
+        <small>nameQ at 5am July 15 2019</small>
+    </section>
+</body>
+</html>

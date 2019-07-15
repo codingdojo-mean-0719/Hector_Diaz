@@ -17,8 +17,7 @@ function refuseAccess(){
     }
 }
 
-function formDataFormat(inputId,thisForm){
-    let el = document.getElementById(inputId);
+function formDataFormat(thisForm){
     const formData = Array.from(thisForm)
     .filter(el => el.name)
     .reduce((memo,element)=>{
