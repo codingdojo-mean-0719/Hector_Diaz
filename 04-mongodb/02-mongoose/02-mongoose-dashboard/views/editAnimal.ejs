@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/style.css">
+  <script  src="/logic.js" ></script>
+  <title>a MUNTJAC has grown</title>
+</head>
+<body>
+  <a href="/muntjacs">return to the MUNTJAC population</a>
+  <form action="/muntjacs/edit/process" method="POST">
+    <h1>a MUNTJAC has grown</h1>
+    name: <input type="text" name="name" value="<%= muntjac.name %>">
+    tusk size: <select name="tuskSize">
+      <option value="smallFry">small fry</option>
+      <option value="littleBully">little bully</option>
+      <option value="contender">contender</option>
+      <option value="namedMan">named man</option>
+      <option value="kingOfTheMountains">king of the mountains</option>
+    </select>
+    <input type="hidden" name="id" value="<%= muntjac._id %>">
+    <button type='submit'>update MUNTJAC</button>
+  </form>
+</body>
+</html>
