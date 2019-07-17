@@ -18,7 +18,7 @@ app.use(session({
 
 }))
 
-require('./server/models/quote')()
+require('./server/models/mongoose')()
 
 require('./server/config/routes.js')(app);
 
