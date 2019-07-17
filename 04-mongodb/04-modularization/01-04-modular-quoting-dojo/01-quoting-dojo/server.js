@@ -30,24 +30,6 @@ app.use(session({
 
 }))
 
-require('./server/config/routes.js')(app)
-io.on('connection',(socket)=>{
-    console.log('socket connection id',socket.id);
-    socket.on("newQoute",data=>{
-        console.log("here's the quote",data)
-        new Quote({qoute:data.quote,author:data.name}).save((err,doc)=>{
-          if(err){
-            console.log('something went wrong');
-          }else{
-            socket.broadcast.emit("postQoute", doc)
-            Quote.find({},(err,qoutes)=>{
-              if(err){
-                throw err
-              }else{
-                socket.emit('postQuotes', qoutes)
-              }
-            })
-          }
-        })
-    })
-})
+require('./server/config/routes.js')(app);
+
+require('./server/controllers/socket')(io);
