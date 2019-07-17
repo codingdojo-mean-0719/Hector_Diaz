@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    
-    //present the user with a form to register thier name to join the chat room 
+
+    //present the user with a form to register thier name to join the chat room
     setTimeout(function(){ refuseAccess()},3000);
     const socket = io();
     //get the new page up to date with the current activity
@@ -25,7 +25,7 @@ $(document).ready(function(){
         const thisForm = this;
         event.preventDefault()
         const formData = formDataFormat(thisForm);
-     
+
         if(formData.name.trim() === ''){
         // $('.nameForm.info').slideUp()
             $('.nameForm .info').slideDown()
@@ -57,7 +57,7 @@ $(document).ready(function(){
     $('.sendMessageForm').submit( function(event){
         const thisForm = this;
         $('.newMessage').html('')
-        const formData = formDataFormat('newMessage',thisForm);
+        const formData = formDataFormat(thisForm);
         if(formData.newMessage.trim() === ''){
             $('.nameForm .info').slideDown()
         }else{
@@ -70,9 +70,9 @@ $(document).ready(function(){
         console.log('this is the post my messagr data',data)
         $('section div').html(`
         ${$('section div').html()}
-        <p class="messages messagesStyling userMessage"><small class="info"><span class="senderStyling">${$('.userName').html()}</span>${data.stamp.date}</small class="info">${data.content}</p> 
+        <p class="messages messagesStyling userMessage"><small class="info"><span class="senderStyling">${$('.userName').html()}</span>${data.stamp.date}</small class="info">${data.content}</p>
         `)
-        
+
     })
     socket.on('postMessage',(data)=>{
         console.log('this is the post messagr data',data)
