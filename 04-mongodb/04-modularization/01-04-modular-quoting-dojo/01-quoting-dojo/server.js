@@ -1,15 +1,3 @@
-const mongoose =  require('mongoose')
-mongoose.connect('mongodb://localhost/QoutingDojo',{ useNewUrlParser: true }, ()=>console.log('connected to database'))
-mongoose.connection.on('connected',()=>console.log('connected to mongodb'))
-
-
-const QouteSchema = new mongoose.Schema({
-  qoute:String,
-  author:String,
-},{timestamps:{createdAt:' enterd'}})
-
-const Quote = mongoose.model('Qoote', QouteSchema)
-
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -29,6 +17,8 @@ app.use(session({
     cookie: {maxAge:600000}
 
 }))
+
+require('./server/models/quote')()
 
 require('./server/config/routes.js')(app);
 
