@@ -1,6 +1,6 @@
 const moongoose = require('mongoose')
 
-Quote = moongoose.model('Qoote')
+const Quote = moongoose.model('Qoote')
 
 
 module.exports = {

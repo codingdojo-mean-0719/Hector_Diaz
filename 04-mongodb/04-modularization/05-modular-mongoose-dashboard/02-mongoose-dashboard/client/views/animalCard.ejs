@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/style.css">
+  <script  src="/logic.js" ></script>
+  <title>a MUNTJAC has grown</title>
+</head>
+<body>
+  <h2>a MUNJAC</h2>
+  <p><%= muntjac.name %></p>
+  <h1>TUSK SIZE</h1>
+  <p><%= muntjac.tuskSize %></p>
+  <a href="/muntjacs/edit/<%= muntjac._id %>">see a MUNTJAC gorw</a>
+</body>
+</html>
