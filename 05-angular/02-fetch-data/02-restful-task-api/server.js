@@ -9,6 +9,6 @@ app.use(express.static(__dirname + '/public/dist/public'));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
-require('./server/config/mongoose');
+require('./server/models/mongoose')();
 
 require('./server/config/routes')(app);
