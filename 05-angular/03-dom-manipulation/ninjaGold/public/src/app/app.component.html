@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav>
+  <p>GOLD:{{ gold }}</p>
+</nav>
+<form (ngSubmit)="proccessFinding('farm', [5, 40])">
+  <h3>FARM</h3>
+  <button type="submit">find gold</button>
+</form>
+<form (ngSubmit)="proccessFinding('casino', [-50, 50])">
+  <h3>CASINO</h3>
+  <button type="submit">find gold</button>
+</form>
+
+<ul *ngFor="let activity of activities">
+  <li>{{ activity }}</li>
+</ul>

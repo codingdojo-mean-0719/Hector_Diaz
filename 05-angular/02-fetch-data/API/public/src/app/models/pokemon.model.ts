@@ -1,5 +1,5 @@
 export class Pokemon {
   [x: string]: any;
-  abilities: [];
-  held_items: [];
+  abilities: Object[];
+  held_items: Object[];
 }

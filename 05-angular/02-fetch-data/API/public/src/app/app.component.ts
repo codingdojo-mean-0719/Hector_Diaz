@@ -16,14 +16,15 @@ export class AppComponent implements OnInit {
   getPokemon(): void {
     this.favPokemon.getPokemon().subscribe(pokemon => {
       console.log('Alakzam, I choose you!', pokemon);
-      console.log('Alakzam uses a ', pokemon.held_items[0].item.name);
-      this.favPokemon
-        .getPokemonAbility(pokemon.abilities[1].ability.url)
-        .subscribe(abilities => {
-          console.log('this is ability', abilities);
-        });
+      // console.log('Alakzam uses a ', pokemon.held_items[0].item.name);
+      // this.favPokemon;
+      // .getPokemonAbility(pokemon.abilities[1].ability.url)
+      // .subscribe(abilities => {
+      //   console.log('this is ability', abilities);
+      // });
       this.pokemon = pokemon;
     });
+    console.log('pokemen ability', this.pokemon.abilities[1]);
   }
   ngOnInit(): void {
     console.log('this is being triggerd on page load');
