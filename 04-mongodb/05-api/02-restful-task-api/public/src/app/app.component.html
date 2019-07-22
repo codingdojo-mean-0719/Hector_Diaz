@@ -1,6 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1>Restful Tasks API</h1>
 
-<ul *ngFor="let task of tasks">
-  <li>{{ task.title }}</li>
-</ul>
+<button (click)="getTasks()">get all task</button>
+
+<div *ngIf="tasks">
+  <ul *ngFor="let task of tasks">
+    <li>{{ task.title }}</li>
+    <button (click)="getTask(task._id)">Show</button>
+  </ul>
+</div>
+
+<div *ngIf="task">
+  <h3>{{ task.title }}</h3>
+  <p>{{ task.discription }}</p>
+</div>
