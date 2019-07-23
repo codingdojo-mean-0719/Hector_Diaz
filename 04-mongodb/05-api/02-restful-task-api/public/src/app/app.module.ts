@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EditTaskComponent],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

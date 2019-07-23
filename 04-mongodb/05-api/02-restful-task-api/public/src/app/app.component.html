@@ -16,6 +16,7 @@
     <li>{{ task.title }}</li>
     <button (click)="getTask(task._id)">edit</button>
     <button (click)="deleteTask(task._id)">delete</button>
+    <button (click)="showTask(task._id)">show</button>
   </ul>
 </div>
 
@@ -28,3 +29,5 @@
     <button type="submit">submit</button>
   </form>
 </div>
+
+<app-edit-task *ngIf="taskToShow" [taskToShow]="taskToShow"></app-edit-task>

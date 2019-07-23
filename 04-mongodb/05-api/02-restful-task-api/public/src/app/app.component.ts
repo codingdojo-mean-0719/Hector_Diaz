@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   task1 = new Task();
   tasks: Task[] = [];
   task: Task;
+  taskToShow: Task;
   constructor(private httpService: HttpService) {}
   ngOnInit() {}
   createTask(event: Event): void {
@@ -20,6 +21,12 @@ export class AppComponent implements OnInit {
       this.task1 = new Task();
     });
     this.getTasks();
+  }
+  showTask(id: string): void {
+    this.httpService.getTask(id).subscribe(task => {
+      console.log('here is the task', task);
+      this.taskToShow = task.task;
+    });
   }
   updateTask(event: Event): void {
     event.preventDefault();
