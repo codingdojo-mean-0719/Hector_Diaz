@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './http.service';
 import { Task } from './models/task.model';
-import { TaskJson } from './models/task.interface';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +9,35 @@ import { TaskJson } from './models/task.interface';
 })
 export class AppComponent implements OnInit {
   title = 'public';
+  task1 = new Task();
   tasks: Task[] = [];
   task: Task;
   constructor(private httpService: HttpService) {}
-  ngOnInit(): void {}
+  ngOnInit() {}
+  createTask(event: Event): void {
+    event.preventDefault();
+    this.httpService.createTask(this.task1).subscribe(() => {
+      this.task1 = new Task();
+    });
+    this.getTasks();
+  }
+  updateTask(event: Event): void {
+    event.preventDefault();
+
+    this.httpService.updateTask(this.task).subscribe(task => {
+      this.task = new Task();
+      console.log('here is the subscribe task', task);
+    });
+    this.getTasks();
+  }
+  deleteTask(id: string): void {
+    this.httpService
+      .deleteTask(id)
+      .subscribe(confirmation =>
+        console.log('her is delete confirmation', confirmation)
+      );
+    this.getTasks();
+  }
   getTasks(): void {
     this.httpService.getTasks().subscribe(tasks => {
       this.tasks = tasks;

@@ -14,6 +14,7 @@ module.exports = {
       .catch(console.log);
   },
   create(request, response) {
+    console.log('server side create task triggerd', request.body);
     Task.create(request.body)
       .then(task => {
         response.json({ message: 'successfuly add a new task', task: task });
@@ -21,6 +22,7 @@ module.exports = {
       .catch(console.log);
   },
   update(request, response) {
+    console.log('server side update triggerd');
     Task.updateOne({ _id: request.params.id }, request.body, { new: true })
       .then(task => {
         response.json({ message: 'successfuly updated a task', task: task });
