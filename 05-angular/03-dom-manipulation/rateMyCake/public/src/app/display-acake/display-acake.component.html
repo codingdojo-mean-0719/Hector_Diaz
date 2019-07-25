@@ -1,0 +1,5 @@
+<img src="{{ cakeToShow.cakeImg }}" alt="a cake" />
+<ul *ngFor="let opinion of cakeToShow.opinions">
+  <li>{{ opinion.rating }}</li>
+  <li>{{ opinion.comment }}</li>
+</ul>

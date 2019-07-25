@@ -1,0 +1,48 @@
+<form newCake="ngForm" (submit)="createCake($event)">
+  Baker: <input type="text" name="baker" [(ngModel)]="newCake.baker" /> <br />
+  Cake Url: <input type="text" name="cakeImg" [(ngModel)]="newCake.cakeImg" />
+  <button>submit</button>
+</form>
+<ul>
+  <li *ngFor="let cake of cakes">
+    <form #newOpinionForm="ngForm" (submit)="createOpinion($event, cake._id)">
+      <img (click)="getCake(cake._id)" src="{{ cake.cakeImg }}" alt="a cake" />
+      console.log('create opinion triggerd');
+      <input
+        type="radio"
+        name="oneStar"
+        value="1"
+        [(ngModel)]="newOpinion.rating"
+      />1 star
+      <input
+        type="radio"
+        name="twoStar"
+        value="2"
+        [(ngModel)]="newOpinion.rating"
+      />2 star
+      <input
+        type="radio"
+        name="threeStar"
+        value="3"
+        [(ngModel)]="newOpinion.rating"
+      />3 star
+      <input
+        type="radio"
+        name="fourStar"
+        value="4"
+        [(ngModel)]="newOpinion.rating"
+      />4 star <br />
+      comment:<input
+        type="text"
+        name="comment"
+        [(ngModel)]="newOpinion.comment"
+      />
+      <button type="submit">add opinion</button>
+    </form>
+  </li>
+</ul>
+
+<app-display-acake
+  *ngIf="cakeToShow"
+  [cakeToShow]="cakeToShow"
+></app-display-acake>

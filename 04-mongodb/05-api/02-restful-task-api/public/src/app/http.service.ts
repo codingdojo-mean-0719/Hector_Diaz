@@ -15,7 +15,7 @@ export class HttpService {
   getTask(id): Observable<TaskJson> {
     return this.http.get<TaskJson>(`/tasks/${id}`);
   }
-  createTask(newTask): Observable<TaskJson> {
+  createTask(newTask: Task): Observable<TaskJson> {
     console.log('create task post triggerd');
     return this.http.post<TaskJson>('/tasks', newTask);
   }
