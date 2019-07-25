@@ -1,0 +1,10 @@
+<h2>{{ weather.name }}</h2>
+
+<img src="{{ image }}" alt="a city" />
+
+<ul>
+  <li>SKYS {{ weather.weather[0].main }}</li>
+  <li>TEMPRATURE {{ weather.main.temp }}</li>
+  <li>HIGH {{ weather.main.temp_max }}</li>
+  <li>LOW {{ weather.main.temp_min }}</li>
+</ul>
