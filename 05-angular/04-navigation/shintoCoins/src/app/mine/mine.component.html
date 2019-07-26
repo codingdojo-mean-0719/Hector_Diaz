@@ -1,0 +1,10 @@
+<h1>MINE SHINTO COINS</h1>
+<form #mined="ngForm" (submit)="mine($event, mined)">
+  <p>
+    I am the computer. I am thinking of a number betwen 1 and 10
+  </p>
+  <small>{{ guess.result }}</small> <br />
+
+  Guess: <input type="text" name="question" [(ngModel)]="guess.question" />
+  <button type="submit">mine</button>
+</form>

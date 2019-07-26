@@ -1,0 +1,22 @@
+<h1>CASUALLY CONSUME THE LEDGER</h1>
+<p>SHINTO COINS activities</p>
+<table>
+  <thead>
+    <tr>
+      <th>action |</th>
+      <th>amount |</th>
+      <th>value |</th>
+      <th>details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let activity of activities">
+      <th>{{ activity.action }}</th>
+      <th>{{ activity.amount }}</th>
+      <th>{{ activity.value }}</th>
+      <th>
+        <button [routerLink]="[activity.id]">details</button>
+      </th>
+    </tr>
+  </tbody>
+</table>

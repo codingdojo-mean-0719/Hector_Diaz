@@ -1,0 +1,9 @@
+<h1>SELL SHINTO COINS</h1>
+<form #transaction="ngForm" (submit)="sell($event, transaction)">
+  <p>current rate of coins is: ${{ rate }}</p>
+  <p>you got {{ coinPurse }} coins to burn</p>
+  <small>{{ notice }}</small> <br />
+  <!-- holy smokes you type a form input as a number! -->
+  amount: <input type="number" name="sold" [(ngModel)]="sold" />
+  <button type="submit">sell</button>
+</form>
