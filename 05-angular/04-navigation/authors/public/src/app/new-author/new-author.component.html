@@ -1,0 +1,8 @@
+<a routerLink="/">home</a>
+
+<h4>add a new AUTHOR</h4>
+
+<form #newAuthor="ngForm" (submit)="createAuthor($event, newAuthor)">
+  name: <input type="text" name="name" [(ngModel)]="author.name" />
+  <button type="submit">Submit</button>
+</form>
