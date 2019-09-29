@@ -1,53 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/style.css">
-    <script  src="/logic.js" ></script>
-    <script  src="/function.js" ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+      integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/logic.js"></script>
+    <script src="/function.js"></script>
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <h1>GROUP CHAT</h1>
-        <p class="userName"></p>
+      <h1>GROUP CHAT</h1>
+      <p class="userName"></p>
     </header>
     <div class="wrap">
+      <section class="messageDash">
+        <h2>messages</h2>
+        <button class="displayMessages">DISPLAY PREVIOUS CHAT</button>
+        <div
+          class="messagesDisplayArea scrolling"
+          id="messagesDisplayArea"
+        ></div>
+        <form method="POST" action="/messages/new" class="sendMessageForm">
+          <textarea
+            id="newMessage"
+            class="newMessage"
+            name="newMessage"
+            cols="35"
+            rows="3"
+            placeholder="type your message here and press 'send to add to the converstation'"
+          ></textarea>
+          <button type="submit" class="sendButton info">send</button>
+        </form>
+      </section>
 
-        <section class="messageDash">
-            <h2>messages</h2>
-            <button class="displayMessages">DISPLAY PREVIOUS CHAT</button>
-            <div class="messagesDisplayArea scrolling" id="messagesDisplayArea">
-            </div>
-                <form method='POST' action='/messages/new' class="sendMessageForm">
-                    <textarea id="newMessage" class="newMessage" name="newMessage" cols="35" rows="3" placeholder="type your message here and press 'send to add to the converstation'"></textarea>
-                    <button type="submit" class="sendButton info">send</button>
-                </form>
-            </section>
-            
-            <div class="line "></div>
+      <div class="line "></div>
 
-            <aside class="whosInChatRoom">
-                <h2 class="chatHeader">who's in the chat room</h2>
-                <div class="scrolling">
-                    
-                </div>
-            </aside>
-
-        </div>
-        <div class="nameFormWrap" style="display:none">    
-            <form action="/" class="nameForm" method="POST">
-                <h3>sign in by entering a unique user name</h3>
-                <small class="info" style="display:none">please enter a username with some characters</small>
-                <input type="text" name="name" class="name">
-                <button type="submit" class="nameButton">SUBMIT</button>
-            </form>
-        </div>
-    </body>
+      <aside class="whosInChatRoom">
+        <h2 class="chatHeader">who's in the chat room</h2>
+        <div class="scrolling"></div>
+      </aside>
+    </div>
+    <div class="nameFormWrap" style="display:none">
+      <form action="/" class="nameForm" method="POST">
+        <h3>sign in by entering a unique user name</h3>
+        <small class="info" style="display:none"
+          >please enter a username with some characters</small
+        >
+        <input type="text" name="name" class="name" />
+        <button type="submit" class="nameButton">SUBMIT</button>
+      </form>
+    </div>
+  </body>
 </html>
 
 <!--OTHER USERS -->
